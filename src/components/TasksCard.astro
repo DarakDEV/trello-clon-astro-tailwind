@@ -1,0 +1,70 @@
+---
+import AboutIcon from "../icons/AboutIcon.astro";
+import HomeIcon from "../icons/HomeIcon.astro";
+import Task from "./Task.astro";
+
+interface Props {
+  title: string;
+  priority: string;
+}
+
+const { title, priority } = Astro.props;
+---
+
+<div
+  class="w-full p-4 bg-white bg-opacity-60 border border-gray-200 rounded-lg shadow sm:p-8"
+>
+  <container class="flex items-center justify-between mb-4">
+    <h5 class="text-xl font-bold leading-none text-gray-900">{title}</h5>
+  </container>
+  <container class="flow-root"
+    ><ul id=`${priority}-list-container` class="divide-y divide-gray-200">
+      <li class="py-3 sm:py-4">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <!--<img
+              class="w-8 h-8 rounded-full"
+              src="/docs/images/people/profile-picture-1.jpg"
+              alt="icon"
+            />-->
+            <AboutIcon />
+          </div>
+          <div class="flex-1 min-w-0 ms-4">
+            <p class="text-sm font-medium text-gray-900 truncate">
+              Terminar To-Do App
+            </p>
+          </div>
+          <div
+            class="inline-flex items-center text-base font-semibold px-2 text-gray-900 bg-green-200 rounded-md"
+          >
+            En proceso
+          </div>
+        </div>
+      </li>
+      <Task title="Esto es una prueba no empezada" status="No empezada" />
+      <Task title="Esto es una prueba en proceso" status="En proceso" />
+      <Task title="Esto es una prueba finalizada" status="Finalizada" />
+      <Task title="Prueba erronea" status="ja" />
+      <Task title="Prueba erronea" status="comor" />
+    </ul>
+  </container>
+</div>
+
+<script define:vars={{ priority }}>
+  const inputBox = document.getElementById("input-box");
+  const urgentLC = document.getElementById(`${priority}-list-container`);
+  const addButton = document.getElementById("addBut");
+
+  function addTarea() {
+    if (inputBox?.value === "") {
+      alert("Debes poner el título de la tarea");
+    } else {
+      let li = document.createElement("li");
+      li.innerHTML = inputBox?.value;
+      li.className = "list-none font-normal text-lg select-none cursor-pointer";
+      urgentLC?.appendChild(li);
+    }
+  }
+
+  addButton?.addEventListener("click", () => addTarea());
+</script>

@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  status: string;
+}
+
+const { title, status } = Astro.props;
+let state = "";
+if (
+  status != "No empezada" &&
+  status != "En proceso" &&
+  status != "Finalizada"
+) {
+  state = "not";
+} else {
+  state = status;
+}
+---
+
+<li class="py-3 sm:py-4">
+  <div class="flex items-center">
+    <div class="flex-shrink-0">
+      <!--<img
+          class="w-8 h-8 rounded-full"
+          src="/docs/images/people/profile-picture-1.jpg"
+          alt="icon"
+        />-->
+    </div>
+    <div class="flex-1 min-w-0 ms-4">
+      <p class="text-sm font-medium text-gray-900">{title}</p>
+      <p class="text-sm text-gray-500">Esto es una descripción de prueba</p>
+    </div>
+    <div
+      class:list={[
+        "inline-flex items-center text-base font-semibold px-2 text-gray-900 rounded-md",
+        {
+          "bg-red-200": state == "No empezada",
+          "bg-yellow-200": state == "En proceso",
+          "bg-green-200": state == "Finalizada",
+          "bg-orange-200": state == "not",
+        },
+      ]}
+    >
+      {status}
+    </div>
+  </div>
+</li>

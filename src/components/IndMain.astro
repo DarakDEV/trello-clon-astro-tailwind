@@ -1,0 +1,54 @@
+---
+import TasksCard from "./TasksCard.astro";
+---
+
+<main
+  class="w-full min-h-screen bg-gradient-to-br from-[#153677] to-[#4e085f] p-2.5"
+>
+  <div
+    class="w-full max-w-screen-xl bg-white mt-24 mb-5 mx-auto pt-10 pb-16 px-8 rounded-lg"
+  >
+    <h2 class="text-xl font-bold text-gray-800 flex items-center mb-5">
+      To-Do List
+    </h2>
+    <container class="flex items-center justify-center pl-5 mb-6">
+      <!--<input
+          type="text"
+          id="input-box"
+          placeholder="Escribe el título de tu tarea"
+          class="flex-1 border-none outline-none bg-transparent p-3"
+        />-->
+      <button
+        id="addBut"
+        class="p-4 rounded-full bg-[#a49aff] font-semibold w-auto h-auto text-l"
+        onclick="addTarea()">Crear tarea</button
+      >
+    </container>
+    <container
+      class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 mx-1 p-4 items-center"
+    >
+      <TasksCard title="URGENTE" priority="urg" />
+      <TasksCard title="MENOS URGENTE" priority="mid" />
+      <TasksCard title="NO URGENTE" priority="low" />
+    </container>
+  </div>
+</main>
+
+<script>
+  const inputBox = document.getElementById("input-box");
+  const urgentLC = document.getElementById("urgent-list-container");
+  const addButton = document.getElementById("addBut");
+
+  function addTarea() {
+    if (inputBox?.value === "") {
+      alert("Debes poner el título de la tarea");
+    } else {
+      let li = document.createElement("li");
+      li.innerHTML = "inputBox?.value";
+      li.className = "list-none font-normal text-lg select-none cursor-pointer";
+      urgentLC?.appendChild(li);
+    }
+  }
+
+  addButton?.addEventListener("click", () => addTarea());
+</script>
