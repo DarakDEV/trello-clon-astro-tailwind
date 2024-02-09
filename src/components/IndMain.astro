@@ -51,4 +51,28 @@ import TasksCard from "./TasksCard.astro";
   }
 
   addButton?.addEventListener("click", () => addTarea());
+
+  const items = document.querySelectorAll(".item");
+  const lists = document.querySelector("#urg-list-container");
+  items.forEach((item) => {
+    item.addEventListener("dragstart", () => {
+      item.classList.add("dragging");
+    });
+    item.addEventListener("dragend", () => item.classList.remove("dragging"));
+  });
+
+  //lists.forEach((list) => {
+  const initList = (e) => {
+    //console.log("Hola");
+    const draggingItem = lists?.querySelector(".dragging");
+    const siblings = [...lists.querySelectorAll(".item:not(.dragging)")];
+    //console.log(siblings);
+    let nextSib = siblings.find((sibling) => {
+      return e.clientY <= (sibling.offsetTop + sibling.offsetHeight) / 1.5;
+    });
+    // });
+
+    lists.insertBefore(draggingItem, nextSib);
+  };
+  lists.addEventListener("dragover", initList);
 </script>
