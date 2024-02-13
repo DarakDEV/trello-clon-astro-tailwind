@@ -17,6 +17,24 @@ if (
 }
 ---
 
+<!--<script define:vars={{ status, state, title }}>
+  const thisLi = document.querySelector(".item");
+
+  thisLi.addEventListener("click", function stateRotation() {
+    console.log(state);
+    if (status == "No empezada") {
+      status = "En proceso";
+    } else if (status == "En proceso") {
+      status = "Finalizada";
+    } else if (status == "Finalizada") {
+      status = "No empezada";
+    } else {
+      status = "not";
+    }
+
+    state = status;
+  });
+</script>-->
 <li draggable="true" class="item py-3 sm:py-4">
   <div class="flex items-center">
     <div class="flex-shrink-0">

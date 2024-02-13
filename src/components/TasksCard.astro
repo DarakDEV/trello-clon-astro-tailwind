@@ -51,19 +51,20 @@ const { title, priority } = Astro.props;
 
 <script define:vars={{ priority }}>
   const inputBox = document.getElementById("input-box");
+  import Task from "./Task.astro";
   const urgentLC = document.getElementById(`${priority}-list-container`);
-  const addButton = document.getElementById("addBut");
-
+  /*const addButton = document.getElementById("addBut");
   function addTarea() {
+    console.log("Entro");
     if (inputBox?.value === "") {
       alert("Debes poner el título de la tarea");
     } else {
-      let li = document.createElement("li");
+      /*let li = document.createElement("li");
       li.innerHTML = inputBox?.value;
       li.className = "list-none font-normal text-lg select-none cursor-pointer";
-      urgentLC?.appendChild(li);
+      urgentLC?.appendChild(<Task title="Test" status="No empezada" />);
     }
   }
 
-  addButton?.addEventListener("click", () => addTarea());
+  addButton?.addEventListener("click", () => addTarea());*/
 </script>

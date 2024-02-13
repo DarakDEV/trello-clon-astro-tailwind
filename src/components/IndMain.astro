@@ -21,7 +21,7 @@ import TasksCard from "./TasksCard.astro";
       <button
         id="addBut"
         class="p-4 rounded-full bg-[#a49aff] font-semibold w-auto h-auto text-l"
-        onclick="addTarea()">Crear tarea</button
+        >Crear tarea</button
       >
     </container>
     <container
@@ -35,22 +35,49 @@ import TasksCard from "./TasksCard.astro";
 </main>
 
 <script>
-  const inputBox = document.getElementById("input-box");
+  //const inputBox = document.getElementById("input-box");
   const urgentLC = document.getElementById("urgent-list-container");
   const addButton = document.getElementById("addBut");
-
-  function addTarea() {
-    if (inputBox?.value === "") {
+  /*function addTarea() {
+    /*if (inputBox?.value === "") {
       alert("Debes poner el título de la tarea");
     } else {
-      let li = document.createElement("li");
-      li.innerHTML = "inputBox?.value";
-      li.className = "list-none font-normal text-lg select-none cursor-pointer";
-      urgentLC?.appendChild(li);
-    }
+    let li = document.createElement("li");
+    li.innerHTML = "hola"; //inputBox?.value;
+    li.className = "list-none font-normal text-lg select-none cursor-pointer";
+    urgentLC?.appendChild(li);
   }
+  //}*/
 
-  addButton?.addEventListener("click", () => addTarea());
+  addButton?.addEventListener("click", function addTarea() {
+    console.log("Test");
+    let form = document.createElement("form");
+    let form_title = document.createElement("label");
+    let task_box_title = document.createElement("input");
+    let task_box_description = document.createElement("textarea");
+    let form_button = document.createElement("input");
+
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "");
+    //Añadir formato con tailwind
+
+    task_box_title.setAttribute("type", "text");
+    task_box_title.setAttribute("placeholder", "Título de la tarea");
+    //Añadir formato con tailwind
+
+    task_box_description.setAttribute("placeholder", "Descripción de la tarea");
+    //Añadir formato tw
+
+    form_button.setAttribute("type", "button");
+    form_button.setAttribute("value", "Agregar");
+    form_button.setAttribute("onclick", "alert('Tarea añadida')");
+
+    form_title.innerHTML = "<h2>Información de la tarea</h2>"; //Añadir TW
+    form.appendChild(form_title);
+    form.appendChild(task_box_title);
+    form.appendChild(task_box_description);
+    form.appendChild(form_button);
+  });
 
   const items = document.querySelectorAll(".item");
   const lists = document.querySelector("#urg-list-container");
@@ -63,14 +90,11 @@ import TasksCard from "./TasksCard.astro";
 
   //lists.forEach((list) => {
   const initList = (e) => {
-    //console.log("Hola");
     const draggingItem = lists?.querySelector(".dragging");
     const siblings = [...lists.querySelectorAll(".item:not(.dragging)")];
-    //console.log(siblings);
     let nextSib = siblings.find((sibling) => {
-      return e.clientY <= (sibling.offsetTop + sibling.offsetHeight) / 1.5;
+      return e.clientY <= (sibling.offsetTop + sibling.offsetHeight) / 1.2;
     });
-    // });
 
     lists.insertBefore(draggingItem, nextSib);
   };
